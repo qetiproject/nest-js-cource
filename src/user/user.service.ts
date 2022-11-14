@@ -13,15 +13,15 @@ export class UserService {
         return createUser;
     }
 
-    update(updateUserDTO: UpdateUserDto, param: {userId: number}) {
-        return { body: updateUserDTO, param};
+    update(updateUserDTO: UpdateUserDto, userId: number) {
+        return { body: updateUserDTO, userId};
     }
 
-    show(param: { userId: number} ) {
-        return param;
+    show(userId: number) {
+        return userId;
      }
     
-     delete(param: { userId: number} ) {
-        return param;
+     delete(userId: number) {
+        return userId;
      }
 }
