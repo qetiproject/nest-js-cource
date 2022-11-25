@@ -21,23 +21,23 @@ import { CreateUserDto } from './dto/create-user.dto';
       return this.userService.get()
     }
   
-    @Post()
-    store(@Body() createUser: CreateUserDto) {
-      return this.userService.create(createUser);
-    }
+    // @Post()
+    // store(@Body() createUser: CreateUserDto) {
+    //   return this.userService.create(createUser);
+    // }
   
-    @Patch('/:userId')
-    update(@Body() updateUserDTO: UpdateUserDto, @Param('userId', ParseIntPipe)  userId: number) {
-      return this.userService.update(updateUserDTO, userId);
-    }
+    // @Patch('/:userId')
+    // update(@Body() updateUserDTO: UpdateUserDto, @Param('userId', ParseIntPipe)  userId: number) {
+    //   return this.userService.update(updateUserDTO, userId);
+    // }
   
-    @Get('/:userId')
-    getUser(@Param('userId', ParseIntPipe) userId: number) {
-      return this.userService.show(userId)
-    }
+    // @Get('/:userId')
+    // getUser(@Param('userId', ParseIntPipe) userId: number) {
+    //   return this.userService.show(userId)
+    // }
   
-    @Delete('/:userId')
-    deleteUser(@Param('userId', ParseIntPipe) userId: number) {
-      return this.userService.delete(userId);
-    }
+  // @Delete('/:userId')
+    // deleteUser(@Param('userId', ParseIntPipe) userId: number) {
+    //   return this.userService.delete(userId);
+    // }
   }
