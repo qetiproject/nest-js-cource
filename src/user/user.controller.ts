@@ -1,43 +1,46 @@
 import {
   Body,
-    Controller,
-    Delete,
-    Get,
-    Param,
-    ParseIntPipe,
-    Patch,
-    Post,
-  } from '@nestjs/common';
-import { UserService } from './user.service';
-import { UpdateUserDto } from './dto/update-user.dto';
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { UserService } from './user.service';
 
-  @Controller('user')
-  export class UserController {
-    constructor(private userService: UserService) {}
+@Controller('user')
+export class UserController {
+  constructor(private userService: UserService) {}
 
-    @Get()
-    getUsers() {
-      return this.userService.get()
-    }
-  
-    // @Post()
-    // store(@Body() createUser: CreateUserDto) {
-    //   return this.userService.create(createUser);
-    // }
-  
-    // @Patch('/:userId')
-    // update(@Body() updateUserDTO: UpdateUserDto, @Param('userId', ParseIntPipe)  userId: number) {
-    //   return this.userService.update(updateUserDTO, userId);
-    // }
-  
-    // @Get('/:userId')
-    // getUser(@Param('userId', ParseIntPipe) userId: number) {
-    //   return this.userService.show(userId)
-    // }
-  
-  // @Delete('/:userId')
-    // deleteUser(@Param('userId', ParseIntPipe) userId: number) {
-    //   return this.userService.delete(userId);
-    // }
+  @Get()
+  getUsers() {
+    return this.userService.get();
   }
+
+  @Post()
+  store(@Body() createUserDto: CreateUserDto) {
+    return this.userService.create(createUserDto);
+  }
+
+  @Patch('/:userId')
+  update(
+    @Body() updateUserDTO: UpdateUserDto,
+    @Param('userId', ParseIntPipe) userId: number,
+  ) {
+    return this.userService.update(updateUserDTO, userId);
+  }
+
+  @Get('/:userId')
+  getUser(@Param('userId', ParseIntPipe) userId: number) {
+    return this.userService.show(userId);
+  }
+
+  @Delete('/:userId')
+  deleteUser(@Param('userId', ParseIntPipe) userId: number) {
+    return this.userService.delete(userId);
+  }
+}

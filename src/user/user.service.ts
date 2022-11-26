@@ -1,4 +1,4 @@
-import { Body, Injectable, Req } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -9,26 +9,26 @@ import { User } from './entity/user.entity';
 export class UserService {
   constructor(
     @InjectRepository(User)
-    private usersRepository: Repository<User>,
+    private userRepository: Repository<User>,
   ) {}
 
   get(): Promise<User[]> {
-    return this.usersRepository.find();
+    return this.userRepository.find();
   }
 
-  // create(@Body() createUser: CreateUserDto) {
-  // return createUser;
-  // }
+  create(createUserDto: CreateUserDto) {
+    return this.userRepository.save(createUserDto);
+  }
 
-  // update(updateUserDTO: UpdateUserDto, userId: number) {
-  //     return { body: updateUserDTO, userId};
-  // }
+  update(updateUserDTO: UpdateUserDto, userId: number) {
+    return { body: updateUserDTO, userId };
+  }
 
-  // show(userId: number) {
-  //     return userId;
-  //  }
+  show(userId: number) {
+    return userId;
+  }
 
-  //  delete(userId: number) {
-  //     return userId;
-  //  }
+  delete(userId: number) {
+    return userId;
+  }
 }
