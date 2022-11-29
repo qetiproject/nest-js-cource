@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { UserService } from 'src/user/user.service';
+import { UserService } from 'src/auth/user/user.service';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from 'src/user/entity/user.entity';
-import { UserModel, UserStatus } from 'src/user/user.model';
+import { User } from 'src/auth/user/entity/user.entity';
+import { UserModel, UserStatus } from 'src/auth/user/user.model';
 import { v4 as uuid } from 'uuid';
-import { RegisterUserDto } from 'src/user/dto/register-user.dto';
+import { RegisterUserDto } from 'src/auth/user/dto/register-user.dto';
 
 @Injectable()
 export class AuthService {
