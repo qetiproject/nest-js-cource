@@ -1,10 +1,16 @@
-import { Request, Controller, Post, UseGuards } from '@nestjs/common';
+import { Request, Controller, Post, UseGuards, Body } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { RegisterUserDto } from 'src/user/dto/register-user.dto';
 import { AuthService } from './auth.service';
 
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
+
+  @Post('/register')
+  store(@Body() registerUserDto: RegisterUserDto) {
+    return this.authService.create(registerUserDto);
+  }
 
   @UseGuards(AuthGuard('local'))
   @Post('/login')
