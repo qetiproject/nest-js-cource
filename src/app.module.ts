@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
 import { UserModule } from './auth/user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './auth/user/entity/user.entity';
@@ -8,7 +7,6 @@ import { ProfileModule } from './profile/profile.module';
 import { TasksModule } from './tasks/tasks.module';
 
 @Module({
-  controllers: [AppController],
   imports: [
     UserModule,
     TypeOrmModule.forRoot({
