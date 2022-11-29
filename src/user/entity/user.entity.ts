@@ -1,8 +1,9 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { UserStatus } from '../user.model';
 
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: number;
 
   @Column()
@@ -13,4 +14,7 @@ export class User {
 
   @Column()
   password: string;
+
+  @Column()
+  status: UserStatus;
 }

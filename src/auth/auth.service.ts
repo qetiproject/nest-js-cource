@@ -3,10 +3,10 @@ import { UserService } from 'src/user/user.service';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { RegisterUserDto } from 'src/user/dto/register-user.dto';
 import { User } from 'src/user/entity/user.entity';
-import { UserModel } from 'src/user/user.model';
+import { UserModel, UserStatus } from 'src/user/user.model';
 import { v4 as uuid } from 'uuid';
+import { RegisterUserDto } from 'src/user/dto/register-user.dto';
 
 @Injectable()
 export class AuthService {
@@ -18,13 +18,15 @@ export class AuthService {
   ) {}
 
   create(registerUserDto: RegisterUserDto): UserModel {
-    const { name, email, password } = registerUserDto;
+    const { name, email, password, status } = registerUserDto;
 
     const user: UserModel = {
       id: uuid(),
       name,
       email,
       password,
+      status:
+        status != UserStatus.ADMINISTRATOR ? status : UserStatus.ADMINISTRATOR,
     };
 
     return user;

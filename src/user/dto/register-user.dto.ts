@@ -1,4 +1,5 @@
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { IsEmail, IsEnum, IsNotEmpty, IsString } from 'class-validator';
+import { UserStatus } from '../user.model';
 
 export class RegisterUserDto {
   @IsNotEmpty()
@@ -12,4 +13,9 @@ export class RegisterUserDto {
   @IsNotEmpty()
   @IsString()
   password: string;
+
+  @IsNotEmpty()
+  @IsEnum(UserStatus)
+  @IsString()
+  status: UserStatus;
 }
