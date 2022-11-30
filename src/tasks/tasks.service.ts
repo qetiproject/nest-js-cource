@@ -1,38 +1,37 @@
-// import { Injectable, NotFoundException } from '@nestjs/common';
-// import { TaskStatus } from './task-status';
-// import { v4 as uuid } from 'uuid';
-// import { CreateTaskDto } from './dto/create-task.dto';
-// import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
-// import { TasksRepository } from './tasks.repository';
-// import { InjectRepository } from '@nestjs/typeorm';
-
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { create } from 'domain';
-import { throwError } from 'rxjs';
+import { Repository } from 'typeorm';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { TaskStatus } from './task-status.enum';
 import { Task } from './task.entity';
-import { TasksRepository } from './tasks.repository';
 
 @Injectable()
 export class TasksService {
   constructor(
-    @InjectRepository(TasksRepository)
-    private tasksRepository: TasksRepository,
+    @InjectRepository(Task) private tasksRepository: Repository<Task>,
   ) {}
 
   // strings ar gebulobs
-  async getTaskById(id: any): Promise<Task> {
-    const found = await this.tasksRepository.findOne(id);
-    if (!found) {
-      throw new NotFoundException(`Task with ID "${id}" not found`);
-    }
-    return found;
-  }
+  // async getTaskById(id: any): Promise<Task> {
+  //   const found = await this.tasksRepository.findOne(id);
+  //   if (!found) {
+  //     throw new NotFoundException(`Task with ID "${id}" not found`);
+  //   }
+  //   return found;
+  // }
 
   async createTask(createTaskDto: CreateTaskDto): Promise<Task> {
-    return this.tasksRepository.create(createTaskDto);
+    const { title, description } = createTaskDto;
+
+    const task: Task = {
+      id: '1',
+      title,
+      description,
+      status: TaskStatus.OPEN,
+    };
+
+    await this.tasksRepository.save(task);
+    return task;
   }
 
   // getAllTasks(): Task[] {
@@ -54,7 +53,6 @@ export class TasksService {
   //   }
   //   return tasks;
   // }
-
   // deleteTask(id: string): void {
   //   const found = this.getTaskById(id);
   //   this.tasks = this.tasks.filter((task) => task.id !== found.id);

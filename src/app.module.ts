@@ -5,6 +5,7 @@ import { User } from './auth/user/entity/user.entity';
 import { AuthModule } from './auth/auth.module';
 import { ProfileModule } from './profile/profile.module';
 import { TasksModule } from './tasks/tasks.module';
+import { Task } from './tasks/task.entity';
 
 @Module({
   imports: [
@@ -16,7 +17,7 @@ import { TasksModule } from './tasks/tasks.module';
       username: 'root',
       password: 'password',
       database: 'nestjs',
-      entities: [User],
+      entities: [User, Task],
       synchronize: true,
     }),
     AuthModule,
